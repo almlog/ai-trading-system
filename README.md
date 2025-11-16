@@ -1,6 +1,3 @@
-# README.md
-
-```markdown
 # AI News Analysis & Automated Trading System
 ## 米国株式ニュース分析・自動取引システム
 
