@@ -6,7 +6,8 @@
       "Bash(\"phase0_data_analysis/data/.gitkeep\")",
       "Bash(\"phase0_data_analysis/outputs/.gitkeep\")",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
