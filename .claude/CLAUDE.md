@@ -109,6 +109,211 @@ git branch -d release/phase0
 
 ---
 
+## 🧪 SPEC駆動開発 + TDD ワークフロー
+
+### 開発の鉄則
+
+**すべての機能開発は以下の順序で実行する（絶対厳守）：**
+
+```
+1. SPEC作成 → 2. TEST作成(RED) → 3. 実装(GREEN) → 4. REFACTOR → 5. DOC更新
+```
+
+### ステップ詳細
+
+#### Step 1: SPEC作成（仕様定義）
+
+**目的**: 何を作るか、どう動くべきかを明確に定義
+
+**成果物**: `specs/` フォルダに仕様書を作成
+
+```markdown
+# specs/feature_name.md
+
+## 概要
+何を実装するか
+
+## 要件
+- 機能要件1
+- 機能要件2
+
+## 入力・出力
+- Input: ...
+- Output: ...
+
+## 制約条件
+- ...
+
+## 成功基準
+- テストケース1
+- テストケース2
+```
+
+#### Step 2: TEST作成（RED段階）
+
+**目的**: 仕様に基づいたテストを先に書く
+
+**ルール**:
+- ❌ **実装コードより先にテストを書く（絶対厳守）**
+- ✅ テストは失敗する（REDになる）ことを確認
+- ✅ `tests/` フォルダに配置
+
+```python
+# tests/test_feature.py
+
+import pytest
+from module import FeatureClass
+
+def test_feature_basic_functionality():
+    """基本機能のテスト"""
+    result = FeatureClass().do_something()
+    assert result == expected_value
+
+def test_feature_edge_case():
+    """エッジケースのテスト"""
+    with pytest.raises(ValueError):
+        FeatureClass().do_something(invalid_input)
+```
+
+**実行**: `pytest tests/test_feature.py` → ❌ FAIL（実装前なので当然）
+
+#### Step 3: 実装（GREEN段階）
+
+**目的**: テストを通過させる最小限の実装
+
+**ルール**:
+- ✅ テストを通すための最小実装
+- ❌ 過剰な実装はしない（YAGNI原則）
+- ✅ すべてのテストがGREENになることを確認
+
+```python
+# module.py
+
+class FeatureClass:
+    def do_something(self, input_value=None):
+        if input_value is None:
+            return expected_value
+        if not self._is_valid(input_value):
+            raise ValueError("Invalid input")
+        return self._process(input_value)
+```
+
+**実行**: `pytest tests/test_feature.py` → ✅ PASS
+
+#### Step 4: REFACTOR（リファクタリング）
+
+**目的**: コードの品質向上、可読性・保守性の改善
+
+**必須チェック項目**:
+- [ ] DRY原則: 重複コードの排除
+- [ ] 関数の単一責任: 1つの関数は1つのことだけ
+- [ ] 命名の明確性: 変数・関数名が意図を表現
+- [ ] コメントの適切性: 複雑なロジックには説明を追加
+- [ ] パフォーマンス: 不要な計算やループの削除
+- [ ] エラーハンドリング: 適切な例外処理
+
+**実行**: リファクタ後も `pytest tests/` → ✅ PASS（テストが壊れないこと）
+
+#### Step 5: DOC更新（ドキュメント）
+
+**目的**: 実装内容を記録し、他者（未来の自分）が理解できるようにする
+
+**更新対象**:
+- `README.md`: 新機能の追加を記載
+- `docs/`: API仕様、使い方ガイド
+- `CHANGELOG.md`: 変更履歴
+- docstring: 関数・クラスのドキュメント
+
+```python
+def do_something(self, input_value=None):
+    """
+    入力値を処理して結果を返す
+
+    Args:
+        input_value (str, optional): 処理する値. Defaults to None.
+
+    Returns:
+        str: 処理結果
+
+    Raises:
+        ValueError: 入力値が無効な場合
+
+    Examples:
+        >>> obj = FeatureClass()
+        >>> obj.do_something()
+        'expected_value'
+    """
+```
+
+---
+
+### TDD 実行コマンド
+
+```bash
+# テスト実行
+pytest tests/
+
+# カバレッジ確認
+pytest --cov=. tests/
+
+# 特定のテストのみ
+pytest tests/test_feature.py::test_specific_case
+
+# 監視モード（ファイル変更時に自動実行）
+pytest-watch
+```
+
+---
+
+### 違反時の対応
+
+**以下の行為は絶対禁止**:
+
+❌ **テストを書かずに実装する**
+→ 即座に実装を削除し、テストから書き直す
+
+❌ **テストが失敗しているのに実装を進める**
+→ GREENになるまで実装に集中
+
+❌ **REFACTORを飛ばす**
+→ リファクタリングを強制実行（品質保証のため）
+
+❌ **ドキュメント更新を忘れる**
+→ 機能追加のPRはドキュメント更新必須
+
+---
+
+### Phase別 TDD戦略
+
+#### Phase 0: データ分析
+- **SPEC**: `specs/phase0_pattern_discovery.md`
+- **TEST**: Jupyter Notebookでの検証、assertion追加
+- **重点**: データ処理ロジックの正確性
+
+#### Phase 1: Lambda関数
+- **SPEC**: `specs/lambda_*.md`
+- **TEST**: `tests/lambda/test_*.py` + モックAWS（moto）
+- **重点**: AWS連携、エラーハンドリング
+
+#### Phase 2-3: 統合システム
+- **SPEC**: `specs/integration_*.md`
+- **TEST**: E2Eテスト、統合テスト
+- **重点**: システム全体の動作保証
+
+---
+
+### MCP活用（推奨）
+
+**Sequential Thinking MCP**:
+- 複雑なロジックのステップバイステップ分析
+- REFACTORの改善案提示
+
+**Context7 MCP**:
+- Pythonテストのベストプラクティス参照
+- AWS Lambda テストパターン検索
+
+---
+
 ## 🚫 Prohibited Actions
 
 ### mainブランチでの禁止事項

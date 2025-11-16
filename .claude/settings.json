@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@context7/mcp-server"
+      ]
+    }
+  },
+  "rules": [
+    "すべての機能開発は SPEC → TEST(RED) → 実装(GREEN) → REFACTOR → DOC の順序で実行",
+    "テストを書かずに実装コードを書くことは禁止",
+    "REFACTORステップは必須（スキップ禁止）",
+    "すべてのテストがPASSすることを確認してからコミット"
+  ],
+  "defaultWorkflow": "spec-driven-tdd",
+  "testFramework": "pytest",
+  "testCoverage": {
+    "minimum": 80,
+    "target": 90
+  }
+}

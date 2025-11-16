@@ -177,6 +177,7 @@ make help                         # 全コマンド一覧
 ## 📖 ドキュメント
 
 - **[セットアップガイド](SETUP_GUIDE.md)** - 詳細な環境構築手順
+- **[TDD セットアップガイド](docs/TDD_SETUP.md)** - SPEC駆動開発+TDD環境構築
 - **[プロジェクトステータス](docs/PROJECT_STATUS.md)** - 現在の進捗状況
 - [完全設計書（最終版）](docs/DESIGN_DOC_FINAL.md) - 4フェーズの詳細計画
 - [Phase 0 README](phase0_data_analysis/README.md) - データ分析環境
