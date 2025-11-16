@@ -1,0 +1,13 @@
+# AI Trading System - Dev Environment Variables
+# Copy this file to terraform.tfvars and fill in your values
+
+aws_region = "us-east-1"
+
+project_name = "ai-trading"
+
+# API Keys (get from respective services)
+finnhub_api_key       = "your_finnhub_api_key_here"
+alpha_vantage_api_key = "your_alpha_vantage_api_key_here"
+
+# Note: Never commit terraform.tfvars to version control!
+# It should be in .gitignore

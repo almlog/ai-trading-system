@@ -1,0 +1,112 @@
+# AI News Analysis & Automated Trading System
+# .gitignore
+
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# ============================================
+# Environment Variables & Secrets
+# ============================================
+.env
+.env.local
+*.key
+*.pem
+kaggle.json
+
+# ============================================
+# Jupyter Notebook
+# ============================================
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+*.nbconvert.output
+
+# ============================================
+# Data Files (Phase 0)
+# ============================================
+phase0_data_analysis/data/*.csv
+phase0_data_analysis/data/*.json
+phase0_data_analysis/data/*.parquet
+phase0_data_analysis/data/*.zip
+
+# Keep example files
+!phase0_data_analysis/data/.gitkeep
+!phase0_data_analysis/data/README.md
+
+# ============================================
+# AWS & Terraform
+# ============================================
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# ============================================
+# IDE & Editor
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ============================================
+# Logs & Temp Files
+# ============================================
+*.log
+logs/
+temp/
+tmp/
+*.tmp
+
+# ============================================
+# Output Files
+# ============================================
+phase0_data_analysis/outputs/*.png
+phase0_data_analysis/outputs/*.jpg
+phase0_data_analysis/outputs/*.pdf
+
+# Keep patterns JSON (important output)
+!phase0_data_analysis/outputs/patterns_*.json
+
+# ============================================
+# Claude Docs (local documentation)
+# ============================================
+claudedocs/*.md
+!claudedocs/.gitkeep
+
+# ============================================
+# Testing
+# ============================================
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover

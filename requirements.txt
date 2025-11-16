@@ -1,0 +1,36 @@
+# AI News Analysis & Automated Trading System
+# Phase 0: Data Analysis Dependencies
+
+# Core Data Science
+pandas==2.1.4
+numpy==1.26.2
+matplotlib==3.8.2
+seaborn==0.13.0
+scipy==1.11.4
+
+# Jupyter Notebook
+jupyter==1.0.0
+ipykernel==6.27.1
+notebook==7.0.6
+
+# Natural Language Processing
+nltk==3.8.1
+textblob==0.17.1
+vaderSentiment==3.3.2
+
+# API Clients
+kaggle==1.5.16
+anthropic==0.8.1
+google-generativeai==0.3.2
+
+# Data Processing
+python-dotenv==1.0.0
+requests==2.31.0
+beautifulsoup4==4.12.2
+
+# Visualization
+plotly==5.18.0
+
+# Utilities
+tqdm==4.66.1
+pytz==2023.3.post1
